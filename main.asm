@@ -503,6 +503,7 @@ INCLUDE "engine/link/mystery_gift.asm"
 INCLUDE "engine/battle/used_move_text.asm"
 INCLUDE "mobile/mobile_41.asm"
 INCLUDE "engine/gfx/load_overworld_font.asm"
+INCLUDE "engine/overworld/play_through.asm"
 
 
 SECTION "mobile42", ROMX

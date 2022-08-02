@@ -105,7 +105,10 @@ VBlank0::
 	call AnimateTileset
 
 .done
-
+	ldh a, [rIF]
+	or 1 << SERIAL
+	ldh [rIF], a
+	
 	ldh a, [hOAMUpdate]
 	and a
 	jr nz, .done_oam

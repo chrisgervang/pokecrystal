@@ -95,6 +95,10 @@ UpdatePlayerCoords:
 	jr nz, .check_step_left
 	ld hl, wYCoord
 	dec [hl]
+	;ld a, $08
+	;ldh [rSB], a
+	;ld a, $81 ; or $83 for GBC fast transfers)
+	;ldh [rSC], a
 	ret
 
 .check_step_left
@@ -102,6 +106,7 @@ UpdatePlayerCoords:
 	jr nz, .check_step_right
 	ld hl, wXCoord
 	dec [hl]
+	;byte_out $03, wXCoord
 	ret
 
 .check_step_right
@@ -109,6 +114,7 @@ UpdatePlayerCoords:
 	ret nz
 	ld hl, wXCoord
 	inc [hl]
+	;byte_out $03, wXCoord
 	ret
 
 UpdateOverworldMap:

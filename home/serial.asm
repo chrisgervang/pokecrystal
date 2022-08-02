@@ -6,6 +6,50 @@ Serial::
 	push de
 	push hl
 
+;(SP & $FF00) >> 8
+
+	; address to request
+	ld a, [rSB]
+	ld c, a
+	ld b, 0
+	ld hl, $DC00
+	add hl, bc
+
+	; switch WRAM bank
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wXCoord)
+	ldh [rSVBK], a
+
+	; load data into serial out
+	ld a, [hl]
+	;ld a, $23
+	ldh [rSB], a
+	; restore WRAM bank
+	pop af
+	ldh [rSVBK], a
+
+	; transfer data
+	ld a, (0 << rSC_ON) | (0 << rSC_CLOCK)
+	ldh [rSC], a
+	ld a, (1 << rSC_ON) | (0 << rSC_CLOCK)
+	ldh [rSC], a
+
+	;ld a, $81 ; or $83 for GBC fast transfers)
+	;ldh [rSC], a
+
+	;cp $01
+	;ld bc, (a & $FF00) >> 8
+	;ld bc, a
+	;or hl, a
+	;ld [hSerialReceive], a
+	;or a, 
+	;ld hl, $D300 + a
+	;add hl, a
+	;| [rSB]
+
+	jr .end
+
 	ldh a, [hMobileReceive]
 	and a
 	jr nz, .mobile

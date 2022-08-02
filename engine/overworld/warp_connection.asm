@@ -146,6 +146,7 @@ EnterMapConnection:
 	ld a, h
 	ld [wOverworldMapAnchor + 1], a
 .done
+	;call SendPosition
 	scf
 	ret
 
@@ -158,6 +159,7 @@ EnterMapWarp:
 	ld [wMapGroup], a
 	ld a, [wNextMapNumber]
 	ld [wMapNumber], a
+	;call SendPosition
 	ret
 
 .SaveDigWarp:
